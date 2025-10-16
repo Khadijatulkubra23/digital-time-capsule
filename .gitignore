@@ -1,0 +1,7 @@
+/vendor/
+/node_modules/
+/.vscode/
+.env
+/uploads/
+*.log
+.DS_Store
