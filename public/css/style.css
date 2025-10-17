@@ -1,0 +1,32 @@
+/* Basic starter styles */
+:root{--bg:#f7f7fb;--accent:#2b6cb0}
+*{box-sizing:border-box}
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    background: var(--bg);
+    color: black;
+}
+header{
+    padding: 2rem;
+    text-align: center;
+    background: white;
+    border-bottom: 1px solid #eee;
+}
+.hero{
+    padding: 4rem;
+    text-align: center;
+}
+.btn{
+    display: inline-block;
+    padding: .6rem 1rem;
+    border-radius: 6px;
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+}
+footer{
+    padding: 1rem;
+    text-align: center;
+    color: #666;
+}

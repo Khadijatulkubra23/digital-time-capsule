@@ -1,7 +1,5 @@
-/vendor/
-/node_modules/
-/.vscode/
-.env
 /uploads/
+/.env
+/.vscode/
 *.log
 .DS_Store
