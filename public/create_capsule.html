@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Capsule</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Create a New Time Capsule</h1>
+        <p><a href="dashboard.html"> ← Back to Dashboard</a></p>
+    </header>
+
+    <main>
+        <form action="../src/api/create_capsule.php" method="POST">
+        <div>
+            <label for="title">Title</label><br>
+            <input id="title" type="text" name="title" required>
+        </div>
+        <br>
+
+        <div>
+            <label for="message">Message</label><br>
+            <textarea name="message" id="message" rows="6" required></textarea>
+        </div>
+        <br>
+
+        <div>
+            <label for="unlock_date">Unlock Date</label><br>
+            <input type="date" id="unlock_date" name="unlock_date" required>
+        </div>
+        <br>
+
+        <div>
+            <label for="visibility">Visibility</label><br>
+            <select name="visibility" id="visibility">
+                <option value="private">Private</option>
+                <option value="shared">Shared</option>
+                <option value="public">Public</option>
+            </select>
+        </div>
+        <br>
+
+        <button type="submit">Save Capsule</button>
+        </form>
+    </main>
+
+    <footer>
+        <small>&copy; <span id="year"></span>Digital Time Capsule</small>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
