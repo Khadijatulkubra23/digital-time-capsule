@@ -1,16 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - Digital Time Capsule</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* Auth card */
+.auth-card {
+    background:white;
+    padding:25px 30px;
+    border-radius:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.07);
+    max-width:400px;
+    margin:30px auto;
+    text-align:center;
+    border-left:5px solid #b8edc6;
+}
+
+.auth-card h2 {
+    margin-bottom:15px;
+    color:#2e4a34;
+}
+
+.input-field {
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+
+.auth-links {
+    margin-top:15px;
+}
+
+.auth-links a {
+    color:#6cc88e;
+    text-decoration:none;
+}
+
+.auth-links a:hover {
+    text-decoration:underline;
+}
+</style>
 </head>
 <body>
-    <h2>Login</h2>
-    <form action="../src/api/login.php" method="POST">
-        <input type="email" name="email" placeholder="Email" required><br>
-        <input type="password" name="password" placeholder="Password" required><br>
-        <button type="submit">Login</button>
-    </form>
+
+<header class="main-header">
+    <h1>Digital Time Capsule</h1>
+    <p>Login to access your saved memories</p>
+</header>
+
+<main>
+    <div class="auth-card">
+        <h2>Login</h2>
+        <form action="../src/api/login.php" method="POST">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" type="email" name="email" placeholder="Email" class="input-field" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password" type="password" name="password" placeholder="Password" class="input-field" required>
+            </div>
+
+            <button type="submit" class="btn">Login</button>
+        </form>
+
+        <div class="auth-links">
+            Don't have an account? <a href="register.html">Register</a>
+        </div>
+    </div>
+</main>
+
+<footer style="text-align:center; margin-top:40px;">
+    <small>&copy; <span id="year"></span> Digital Time Capsule</small>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
 </body>
 </html>

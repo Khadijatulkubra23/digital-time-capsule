@@ -1,17 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register - Digital Time Capsule</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* Full-width header card */
+.header-card {
+    background: #ffffff;
+    padding: 25px 40px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+    border-left: 5px solid #b8edc6;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.header-card h2 {
+    margin: 0 0 5px 0;
+    color: #2e4a34;
+    font-size: 28px;
+}
+
+.header-card p {
+    margin: 0;
+    color: #4a5b4a;
+    font-size: 16px;
+}
+
+/* Auth card (form) */
+.auth-card {
+    background:white;
+    padding:25px 30px;
+    border-radius:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.07);
+    max-width:500px;
+    margin:0 auto 30px auto;
+    border-left:5px solid #b8edc6;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    flex: 0 0 120px;
+    font-weight: 500;
+    color: #355b3e;
+}
+
+.form-group input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.btn {
+    padding:12px;
+    border-radius:8px;
+    border:none;
+    background:#88d6a5;
+    color:#fff;
+    font-weight:500;
+    cursor:pointer;
+    width:100%;
+    margin-top:10px;
+}
+
+.btn:hover {
+    background:#6cc88e;
+}
+
+.auth-links {
+    text-align:center;
+    margin-top:15px;
+}
+
+.auth-links a {
+    color:#6cc88e;
+    text-decoration:none;
+}
+
+.auth-links a:hover {
+    text-decoration:underline;
+}
+
+#message {
+    margin-bottom:15px;
+    font-weight:600;
+    text-align:center;
+}
+</style>
 </head>
 <body>
+
+<!-- Header card -->
+<div class="header-card">
     <h2>Register</h2>
-    <form action="../src/api/register.php" method="POST">
-        <input type="text" name="name" placeholder="Full Name" required><br>
-        <input type="email" name="email" placeholder="Email" required><br>
-        <input type="password" name="password" placeholder="Password" required><br>
-        <button type="submit">Register</button>
+    <p style="text-align:center; margin-top:5px;">Create your account to start saving memories.</p>
+</div>
+
+<!-- Form card -->
+<div class="auth-card">
+    <p id="message"></p>
+
+    <form id="registerForm" action="../src/api/register.php" method="POST">
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input id="name" type="text" name="name" placeholder="Full Name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" placeholder="Email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input id="password" type="password" name="password" placeholder="Password" required>
+        </div>
+
+        <button type="submit" class="btn">Register</button>
     </form>
+
+    <div class="auth-links">
+        Already have an account? <a href="login.html">Login</a>
+    </div>
+</div>
+
+<script>
+    // Show messages based on URL params
+    const urlParams = new URLSearchParams(window.location.search);
+    const msgEl = document.getElementById('message');
+
+    if (urlParams.has('error')) {
+        const error = urlParams.get('error');
+        if (error === 'email_exists') msgEl.textContent = 'Email already exists!';
+        else if (error === 'empty_fields') msgEl.textContent = 'Please fill all fields!';
+        msgEl.style.color = 'red';
+    } else if (urlParams.has('success')) {
+        msgEl.textContent = 'Registration successful! Please log in.';
+        msgEl.style.color = 'green';
+    }
+</script>
+
 </body>
 </html>

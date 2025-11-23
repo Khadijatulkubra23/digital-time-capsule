@@ -5,49 +5,158 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Capsule</title>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Page-specific overrides */
+        body {
+            background: #f3fbf5;
+            color: #2f3b2f;
+        }
+
+        .main-header, .main-footer {
+            text-align: center;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            text-align: center;
+            color: #2e4a34;
+        }
+
+        form div {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: 500;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, textarea, select {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #b8edc6;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #6cc88e;
+            box-shadow: 0 0 5px rgba(108,200,142,0.5);
+        }
+
+        button.btn {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            background: #88d6a5;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button.btn:hover {
+            background: #6cc88e;
+        }
+
+        input[type="file"] {
+            padding: 5px;
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 14px;
+            color: #4a5b4a;
+        }
+
+        a {
+            color: #6cc88e;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <header>
+    <header class="main-header">
         <h1>Create a New Time Capsule</h1>
-        <p><a href="dashboard.html"> ← Back to Dashboard</a></p>
+        <p><a href="dashboard.php">← Back to Dashboard</a></p>
     </header>
 
     <main>
-        <form action="../src/api/create_capsule.php" method="POST">
-        <div>
-            <label for="title">Title</label><br>
-            <input id="title" type="text" name="title" required>
-        </div>
-        <br>
+        <div class="card">
+            <!-- Added enctype for file uploads -->
+            <form action="../src/api/create_capsule.php" method="POST" enctype="multipart/form-data">
+                <div>
+                    <label for="title">Title</label>
+                    <input id="title" type="text" name="title" placeholder="Your capsule title..." required>
+                </div>
 
-        <div>
-            <label for="message">Message</label><br>
-            <textarea name="message" id="message" rows="6" required></textarea>
-        </div>
-        <br>
+                <div>
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="6" placeholder="Your secret message..." required></textarea>
+                </div>
 
-        <div>
-            <label for="unlock_date">Unlock Date</label><br>
-            <input type="date" id="unlock_date" name="unlock_date" required>
-        </div>
-        <br>
+                <div>
+                    <label for="unlock_date">Unlock Date</label>
+                    <input type="date" id="unlock_date" name="unlock_date" required>
+                </div>
 
-        <div>
-            <label for="visibility">Visibility</label><br>
-            <select name="visibility" id="visibility">
-                <option value="private">Private</option>
-                <option value="shared">Shared</option>
-                <option value="public">Public</option>
-            </select>
-        </div>
-        <br>
+                <div>
+                    <label for="visibility">Visibility</label>
+                    <select id="visibility" name="visibility">
+                        <option value="private">Private</option>
+                        <option value="shared">Shared</option>
+                        <option value="public">Public</option>
+                    </select>
+                </div>
 
-        <button type="submit">Save Capsule</button>
-        </form>
+                <!-- Media Upload Section -->
+                <div>
+                    <label for="images">Upload Images</label>
+                    <input type="file" name="images[]" id="images" accept="image/*" multiple>
+                </div>
+
+                <div>
+                    <label for="videos">Upload Videos</label>
+                    <input type="file" name="videos[]" id="videos" accept="video/*" multiple>
+                </div>
+
+                <div>
+                    <label for="audio">Upload Audio / Voice</label>
+                    <input type="file" name="audio[]" id="audio" accept="audio/*" multiple>
+                </div>
+
+                <button type="submit" class="btn">Save Capsule</button>
+            </form>
+        </div>
     </main>
 
-    <footer>
-        <small>&copy; <span id="year"></span>Digital Time Capsule</small>
+    <footer class="main-footer">
+        &copy; <span id="year"></span> Digital Time Capsule
     </footer>
 
     <script>

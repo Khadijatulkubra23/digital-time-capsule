@@ -6,25 +6,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
 
+    // Check for empty fields
     if (empty($name) || empty($email) || empty($password)) {
-        die("All fields are required.");
+        header("Location: /digital-time-capsule/public/register.html?error=empty_fields");
+        exit;
     }
 
     // Check if user already exists
-
-    $stmt =$pdo->prepare("SELECT id FROM users WHERE email =?");
+    $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
     $stmt->execute([$email]);
     if ($stmt->fetch()) {
-        die("Email already registered");
+        header("Location: /digital-time-capsule/public/register.html?error=email_exists");
+        exit;
     }
 
-    // Hash password
+    // Hash the password
     $hashed = password_hash($password, PASSWORD_BCRYPT);
 
-    // Insert new user
+    // Insert new user into database
     $stmt = $pdo->prepare("INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)");
     $stmt->execute([$name, $email, $hashed]);
 
-    echo "Registration successful! <a href='login.html'>Login</a>";
+    // Redirect to register.html with success message
+    header("Location: /digital-time-capsule/public/register.html?success=1");
+    exit;
 }
-?>

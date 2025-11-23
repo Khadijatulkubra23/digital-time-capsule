@@ -4,27 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Time Capsule</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/landing.css">
 </head>
 <body>
-    <header>
-        <h1>Digital Time Capsule</h1>
-        <p>Create, lock, and rediscover your memories.</p>
-    </header>
+    <div class="overlay"></div>
 
-    <main>
-        <section class="hero">
-            <a class="btn" href="/public/index.html">Start (demo)</a>
-            <br><br>
-            <a class="btn" href="shared_capsules.php">Shared With Me</a>
-        </section>
-    </main>
+    <div class="hero-container">
+        <h1 class="hero-title">Welcome to the Digital Time Capsule</h1>
+        <p class="hero-subtitle">Create, lock, and rediscover your memories.</p>
+        <button class="btn hero-btn" id="startBtn">Start Your Experience</button>
+    </div>
 
     <footer>
-        <small>&copy; <span id="year"></span>Digital Time Capsule</small>
+        <small>&copy; <span id="year"></span> Digital Time Capsule</small>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="js/landing.js"></script>
     <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
