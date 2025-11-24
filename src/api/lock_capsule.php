@@ -12,8 +12,8 @@ if (!$id || !$user_id) {
     exit;
 }
 
-// Fetch current status
-$stmt = $pdo->prepare("SELECT status FROM capsules WHERE id=? AND user_id=?");
+// Fetch current status + unlock date
+$stmt = $pdo->prepare("SELECT status, unlock_date FROM capsules WHERE id=? AND user_id=?");
 $stmt->execute([$id, $user_id]);
 $capsule = $stmt->fetch();
 
@@ -22,8 +22,27 @@ if (!$capsule) {
     exit;
 }
 
-// Toggle status
-$new_status = $capsule['status'] === 'locked' ? 'unlocked' : 'locked';
+// Get timing info
+$currentTime = time();
+$unlockTime = strtotime($capsule['unlock_date']);
+$currentStatus = $capsule['status'];
+
+
+// ========================
+// RULE:
+// Before unlock_date -> cannot unlock
+// ========================
+if ($currentStatus === 'locked' && $currentTime < $unlockTime) {
+    echo json_encode([
+        "success" => false,
+        "message" => "You cannot unlock this capsule before its unlock date."
+    ]);
+    exit;
+}
+
+// Otherwise allow toggle
+$new_status = $currentStatus === 'locked' ? 'unlocked' : 'locked';
+
 $update = $pdo->prepare("UPDATE capsules SET status=? WHERE id=? AND user_id=?");
 $update->execute([$new_status, $id, $user_id]);
 

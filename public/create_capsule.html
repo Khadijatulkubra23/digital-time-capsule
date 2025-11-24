@@ -107,6 +107,30 @@
     </header>
 
     <main>
+        <div id="popup-success" style="
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.4);
+    justify-content:center;
+    align-items:center;
+    z-index:9999;">
+    <div style="
+        background:white;
+        padding:25px 30px;
+        border-radius:12px;
+        box-shadow:0 5px 20px rgba(0,0,0,0.3);
+        text-align:center;
+        font-size:18px;
+        color:#2e4a34;
+        max-width:350px;">
+         Capsule created successfully!
+    </div>
+</div>
+
         <div class="card">
             <!-- Added enctype for file uploads -->
             <form action="../src/api/create_capsule.php" method="POST" enctype="multipart/form-data">
@@ -161,6 +185,20 @@
 
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
+    
+document.addEventListener("DOMContentLoaded", function() {
+    if (localStorage.getItem('capsule_success')) {
+        document.getElementById('popup-success').style.display = 'flex';
+
+        setTimeout(() => {
+            document.getElementById('popup-success').style.display = 'none';
+        }, 2000);
+
+        localStorage.removeItem('capsule_success');
+    }
+});
+</script>
+
+
 </body>
 </html>

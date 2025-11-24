@@ -60,8 +60,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ");
         $stmt->execute([$user_id, $title, $message, $unlock_date, $visibility, $status, $mediaJson]);
 
-        // Redirect with success
-        header("Location: /digital-time-capsule/public/create_capsule.html?success=1");
+        // Success popup with localStorage
+        echo "<script>
+                localStorage.setItem('capsule_success', '1');
+                window.location.href = '../../public/create_capsule.html';
+              </script>";
         exit;
     } catch (PDOException $e) {
         // Redirect with error
